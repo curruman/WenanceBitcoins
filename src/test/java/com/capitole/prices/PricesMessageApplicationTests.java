@@ -1,13 +1,14 @@
-package com.capitole.products;
+package com.capitole.prices;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 @SpringBootTest
-class ProductsApplicationTests {
+class PricesMessageApplicationTests {
 
 	@Test
 	void contextLoads() {
 	}
-
 }
