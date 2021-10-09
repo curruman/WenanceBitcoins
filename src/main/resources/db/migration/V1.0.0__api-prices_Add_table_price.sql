@@ -1,6 +1,6 @@
 SET MODE MYSQL;
 
-CREATE TABLE IF NOT EXISTS `prices` (
+CREATE TABLE IF NOT EXISTS `price` (
 	`price_list_id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `brand_id` int NOT NULL,
     `product_id` int NOT NULL,
