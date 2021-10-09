@@ -2,14 +2,12 @@ package com.capitole.prices.domain.dto;
 
 
 import com.capitole.prices.validators.anotation.ConsistentDateParameters;
-import com.capitole.prices.validators.anotation.DateValidator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.validation.annotation.Validated;
 
@@ -20,7 +18,6 @@ import javax.validation.constraints.Digits;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-import static java.util.Objects.isNull;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Validated
@@ -64,7 +61,6 @@ public class Price extends RepresentationModel<Price> {
     private String currencyCode;
 
     @ConsistentDateParameters
-    @DateValidator
     public Price(Long priceListId, Long brandId, Long productId, Timestamp startDate, Timestamp endDate, Integer priority, BigDecimal price, String currencyCode) {
         this.priceListId =priceListId;
         this.brandId=brandId;
