@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 class PricesMessageApplicationTests {
 
 	@Test
-	void contextLoads() {
+	void startsApplicationAndLoadsContext() {
+		assertDoesNotThrow(()-> PricesMessageApplication.main(new String[]{}));
 	}
 }

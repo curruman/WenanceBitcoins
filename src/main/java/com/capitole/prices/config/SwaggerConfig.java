@@ -47,7 +47,7 @@ public class SwaggerConfig {
                 "Order Service API Description",
                 "1.0",
                 "http://capitole.com/terms",
-                new Contact("ING", "https://capitole.com", "susanagalanga30@gmail.com"),
+                new Contact("Capitole consulting", "https://capitole.com", "susanagalanga30@gmail.com"),
                 "LICENSE",
                 "LICENSE URL",
                 Collections.emptyList()

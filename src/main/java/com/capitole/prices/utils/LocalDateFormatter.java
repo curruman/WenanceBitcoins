@@ -18,4 +18,9 @@ public class LocalDateFormatter implements Formatter<LocalDateTime> {
     public String print(LocalDateTime object, Locale locale) {
         return DateTimeFormatter.ISO_DATE.format(object);
     }
+
+    public static LocalDateTime getDateToFind(String date){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH.mm.ss");
+        return LocalDateTime.parse(date, formatter);
+    }
 }

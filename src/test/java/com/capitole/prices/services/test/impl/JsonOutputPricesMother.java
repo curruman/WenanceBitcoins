@@ -29,4 +29,17 @@ public class JsonOutputPricesMother implements JsonOutputServiceTest {
                 .response(Response.builder().code(ApplicationMessage.SUCCESS.getCode()).message(ApplicationMessage.SUCCESS.getMessage()).strCode(ApplicationMessage.SUCCESS.getStrCode()).build()).build();
 
     }
+
+    @Override
+    public JsonOutputPrices getJsonOutputPricesConstants(Long productId, Long brandId) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH.mm.ss");
+        LocalDateTime dateTime = LocalDateTime.parse("2020-06-14-10.00.00", formatter);
+        double tax = 0.21;
+        BigDecimal price=new BigDecimal("35.5");
+        return  JsonOutputPrices.builder().productId(productId).brandId(brandId).dateToFound(dateTime)
+                .rateToApply(price).tax(tax).finalPrice(price.add(price.multiply(BigDecimal.valueOf(tax))).setScale(2, RoundingMode.HALF_UP)).price(Price.builder().priceListId(1L).startDate(Timestamp.valueOf("2020-06-14 00:00:00.0"))
+                        .endDate(Timestamp.valueOf("2020-12-31 23:59:59.0")).priority(0).price(price).brandId(brandId).productId(productId).currencyCode("EUR").build())
+                .response(Response.builder().code(ApplicationMessage.SUCCESS.getCode()).message(ApplicationMessage.SUCCESS.getMessage()).strCode(ApplicationMessage.SUCCESS.getStrCode()).build()).build();
+
+    }
 }

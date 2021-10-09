@@ -1,12 +1,10 @@
 package com.capitole.prices.output.objects;
 
 import com.capitole.prices.domain.dto.Price;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Digits;
@@ -18,7 +16,6 @@ import java.time.LocalDateTime;
 
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JsonOutputPrices implements Serializable {

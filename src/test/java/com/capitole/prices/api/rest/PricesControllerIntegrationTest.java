@@ -2,6 +2,7 @@ package com.capitole.prices.api.rest;
 
 import com.capitole.prices.PricesMessageApplication;
 import com.capitole.prices.domain.dto.Price;
+import com.capitole.prices.enums.ApplicationMessage;
 import com.capitole.prices.output.objects.JsonOutputPrices;
 import com.capitole.prices.services.test.impl.JsonOutputPricesMother;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,18 +19,10 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.stream.Stream;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -67,7 +60,7 @@ public class PricesControllerIntegrationTest {
 
     @ParameterizedTest
     @MethodSource("testCases")
-    void givenPriceWithoutErrors(Long brandId, Long productId, String dateString, String startDate, String endDate, BigDecimal price) throws Exception {
+    void givenPriceInControllerWithoutErrors(Long brandId, Long productId, String dateString, String startDate, String endDate, BigDecimal price) throws Exception {
         JsonOutputPricesMother jsonOutputPricesMother = new JsonOutputPricesMother();
         JsonOutputPrices jsonOutputPrices = jsonOutputPricesMother.getJsonOutputPrices(productId,brandId,dateString, startDate, endDate, price);
         this.mockMvc
@@ -81,5 +74,20 @@ public class PricesControllerIntegrationTest {
                 .andExpect(jsonPath("$.rateToApply").value(price));
     }
 
+    // assertThrows(RuntimeException.class, ()->pricesController.foundPrice(brandId,productId, LocalDateFormatter.getDateToFind(dateString)));
+    @Test
+    void givenPriceThenInputErrorRestControllerAdvice() throws Exception {
+        Long brandId=1L; Long productId=35455L; String dateString="XXXX";
+        JsonOutputPrices jsonOutputPrices = new JsonOutputPricesMother().getJsonOutputPricesConstants(productId,brandId);
 
+        this.mockMvc
+                .perform(
+                        get("/prices/api/v1/findPrice/"+productId+"/"+brandId+"?dateFound="+ dateString)
+                                .contentType(APPLICATION_JSON)
+                                .content(objectMapper.writeValueAsString(jsonOutputPrices)))
+                .andDo(print())
+                .andExpect(status().is5xxServerError())
+                .andExpect(content().contentType(APPLICATION_JSON))
+                .andExpect(jsonPath("$.response.code").value(99));
+    }
 }

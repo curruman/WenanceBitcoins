@@ -6,6 +6,7 @@ import com.capitole.prices.domain.dto.Price;
 import com.capitole.prices.domain.repository.PricesRepository;
 import com.capitole.prices.domain.services.PricesServices;
 import com.capitole.prices.enums.ApplicationMessage;
+import com.capitole.prices.exceptions.DateException;
 import com.capitole.prices.output.objects.JsonOutputPrices;
 import com.capitole.prices.output.objects.JsonOutputPrices.Response;
 import org.apache.commons.logging.Log;
@@ -17,9 +18,10 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 import static com.capitole.prices.utils.ConstantsUtils.FAILED_QUERY;
+import static com.capitole.prices.utils.ConstantsUtils.FORMAT_INVALIDATE;
 import static java.util.Objects.isNull;
 import static java.util.Optional.ofNullable;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -55,19 +57,13 @@ public class PricesServiceImpl implements PricesServices {
         if (isNull(dateFound) || isNull(productId) || isNull(brandId)) {
             return getBadResponse();
         }
-        Timestamp timeDB= Timestamp.valueOf(dateFound);
+        Timestamp timeDB= Optional.of(Timestamp.valueOf(dateFound)).orElseThrow(()-> new DateException(FORMAT_INVALIDATE));
         Price price= pricesRepository.findByProductIdAndBrandIdAndDateBetweenStartDateAndEndDate(timeDB, productId, brandId);
 
         return ofNullable(price).map(p -> JsonOutputPrices.builder().productId(productId).brandId(brandId).dateToFound(timeDB.toLocalDateTime())
                         .price(p).rateToApply(p.getPrice()).tax(selfConfiguration.getTax()).finalPrice(calculateFinalPrice(p.getPrice()))
                         .response(setResponsePrice(ApplicationMessage.SUCCESS, "")).build())
                 .orElse(JsonOutputPrices.builder().response(setResponsePrice(ApplicationMessage.UNEXPECTED, FAILED_QUERY)).build());
-    }
-
-    @Override
-    public LocalDateTime getDateToFind(String date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH.mm.ss");
-        return LocalDateTime.parse(date, formatter);
     }
 
     @Override

@@ -24,6 +24,5 @@ public class ConsistentDateParameterValidator implements ConstraintValidator<Con
             throw new IllegalArgumentException(ILEGAL_PARAMETER_DATE_ERROR);
         }else return true;
 
-        //return ((LocalDateTime) value[0]).isAfter(LocalDateTime.now()) && ((LocalDateTime) value[0]).isBefore((LocalDateTime) value[1]);
     }
 }

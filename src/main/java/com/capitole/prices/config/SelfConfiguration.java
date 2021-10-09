@@ -1,26 +1,22 @@
 package com.capitole.prices.config;
 
-import com.capitole.prices.utils.LocalDateFormatter;
 import io.netty.channel.ChannelOption;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.format.Formatter;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.datetime.standard.DateTimeFormatterRegistrar;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import reactor.netty.http.client.HttpClient;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Pattern;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Configuration
@@ -42,12 +38,6 @@ public class SelfConfiguration implements WebMvcConfigurer {
         return WebClient.builder()
                 .clientConnector(new ReactorClientHttpConnector(httpClient)).defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE).build();
     }
-
-    /*@Bean
-    @Primary
-    public Formatter<LocalDateTime> localDateFormatter() {
-        return new LocalDateFormatter();
-    }*/
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
