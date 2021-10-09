@@ -75,14 +75,13 @@ And all kinds of functional tests were carried out from the google chrome boomer
 
 ![quasar_triangulation0](./resources/funtionalTest.png)
 
-## Architecture
+## Swagger Documentation
 
-##Swagger Documentation
 
 When running the service you can check the following link to see the specifications of the endpoints used in the following link
 
 http://localhost:8080/swagger-ui.html#/
-## Sonarqube Evidences
+
 
 
 
