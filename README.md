@@ -1,9 +1,19 @@
-# MICROSERVICE MESSAGES PRICE
+# MICROSERVICE MESSAGES CRIPTO CURRENCY
+
+## Project Documentation
+
+See path in the project:
+ 
+`docs/developer_guide/developer_guide.md`
+
+And, when running the service you can check the following link to see the specifications of the endpoints used in the following link
+
+http://localhost:8080/swagger-ui.html#/
 
 ## Clone Project
 1. Clone repository 
 
-	`git clone https://github.com/Susanita08/CapitolePrices.git`
+	`git clone https://github.com/curruman/WenanceBitcoins.git`
 
 2. Change for branch **master** to **develop** (or any other)
 
@@ -13,7 +23,7 @@
 ##  Deploy
 Description of the procedures for generating the * price * project packages
 
-### 1. Update fireoperation's file
+### 1. Update Bitcoin
 Update the folder with the sources of the git branch of interest (* develop * or * release *), directly from the git repository.
 In the * workspace * folder, execute the commands:
 
@@ -26,7 +36,7 @@ Before performing this step, make sure:
 
 - Setting the environment variable * SPRING_CONFIG_LOCATION *
   
-	`SPRING_CONFIG_LOCATION = classpath:/,file:<X:/workspace_dir>/capitole-prices-message/config/`
+	`SPRING_CONFIG_LOCATION = classpath:/,file:<X:/workspace_dir>/wenance-bitcoins-message/config/`
 
 - Parameterization of VM in project:
 	
@@ -68,8 +78,8 @@ The following unzip command can help:
 
  > **OBS.:** The destination folder must have the following structure:
   > ```  
-  >  \srv\captura\prices
-  >		|   price.sh
+  >  \srv\captura\currency
+  >		|   currency.sh
   >		+---config
   >		|   application.properties
   >		+---log
@@ -85,10 +95,10 @@ The following unzip command can help:
  > * ./logs/logback-spring.xml
 	 		When the 'application.properties' file is copied for the first time,
 			edit for the configuration:
-			   `capitole.logging.path=../../logs`
+			   `wenance-bitcoins.logging.path=../../logs`
 
 ### 5. Running Price Project
-For each service subfolder with the prefix * price * in the name, the `price.sh` script will create a background process (* nohup *) on the server.
+For each service subfolder with the prefix * price * in the name, the `currency.sh` script will create a background process (* nohup *) on the server.
 
 ### 6. Service Execution Verification
 To check if project were started correctly for this, you can use the command 'ps' which lists the services in 'java' that are running:

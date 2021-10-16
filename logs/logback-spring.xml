@@ -1,6 +1,6 @@
 <configuration scan="true" scanPeriod="30 seconds">
-    <springProperty scope="context" name="LOG_PATH" source="capitole.logging.path"/>
-    <springProperty scope="context" name="LOG_FILE" source="capitole.logging.file"/>
+    <springProperty scope="context" name="LOG_PATH" source="wenance.logging.path"/>
+    <springProperty scope="context" name="LOG_FILE" source="wenance.logging.file"/>
     
     <appender name="FILE_OUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_PATH}/${LOG_FILE}.log</file>

@@ -9,11 +9,11 @@
 		<relativePath/>
 	</parent>
 
-	<groupId>com.capitole</groupId>
-	<artifactId>prices</artifactId>
+	<groupId>com.wenance</groupId>
+	<artifactId>bitcoins</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>prices</name>
-	<description>Project of Spring Boot for Capitole</description>
+	<name>bitcoins</name>
+	<description>Project of Spring Boot for Wenance</description>
 
 	<properties>
 		<java.version>11</java.version>
@@ -22,7 +22,7 @@
 		<swagger.version>2.9.2</swagger.version>
 		<flyway.user>admin</flyway.user>
 		<flyway.password>admin123</flyway.password>
-		<flyway.schemas>capitole</flyway.schemas>
+		<flyway.schemas>cripto_wenance</flyway.schemas>
 		<flyway.placeholders.location>classpath:bd/migration</flyway.placeholders.location>
 	</properties>
 
@@ -123,11 +123,11 @@
 				<version>8.0.0-beta1</version>
 
 				<configuration>
-					<url>jdbc:h2:file:~/capitole</url>
+					<url>jdbc:h2:file:~/cripto_wenance</url>
 					<user>admin</user>
 					<password>admin123</password>
 					<schemas>
-						<schema>capitole</schema>
+						<schema>cripto_wenance</schema>
 					</schemas>
 				</configuration>
 				<dependencies>
